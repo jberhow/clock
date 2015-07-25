@@ -5,7 +5,10 @@
 window.onload = function () {
     var canvas = document.getElementById("myCanvas");
     var c = canvas.getContext("2d");
-    var i = 0, j = 0, k = 0;
+    var time = new Date();
+    var second = time.getSeconds(),
+        minute = time.getMinutes(),
+        hour = time.getHours();
 
     c.translate(canvas.width / 2, canvas.height / 2);
 
@@ -21,25 +24,31 @@ window.onload = function () {
 
         c.beginPath();
         c.moveTo(0, 0);
-        c.lineTo(90*Math.cos(i*Math.PI/30), 90*Math.sin(i*Math.PI/30));
+        c.lineTo(90*Math.cos(second*Math.PI/30 - Math.PI/2), 90*Math.sin(second*Math.PI/30 - Math.PI/2));
         c.strokeStyle = "red";
         c.lineWidth = 1;
         c.stroke();
 
-        i++;
+        second++;
+        if (second === 59) {
+            second = -1;
+        }
     }
 
     function minutes() {
 
         c.beginPath();
         c.moveTo(0, 0);
-        c.lineTo(100*Math.cos(j*Math.PI/30), 100*Math.sin(j*Math.PI/30));
+        c.lineTo(100*Math.cos(minute*Math.PI/30 - Math.PI/2), 100*Math.sin(minute*Math.PI/30 - Math.PI/2));
         c.strokeStyle = "black";
         c.lineWidth = 3;
         c.stroke();
 
-        if (i % 61 === 0 && i > 60) {
-            j++;
+        if (second === 0) {
+            minute++;
+        }
+        if (minute === 59) {
+            minute = -1;
         }
     }
 
@@ -47,13 +56,13 @@ window.onload = function () {
 
         c.beginPath();
         c.moveTo(0, 0);
-        c.lineTo(70*Math.cos(k*Math.PI/30), 70*Math.sin(k*Math.PI/30));
+        c.lineTo(70*Math.cos(hour*Math.PI/6 - Math.PI/2), 70*Math.sin(hour*Math.PI/6 - Math.PI/2));
         c.strokeStyle = "black";
         c.lineWidth = 5;
         c.stroke();
 
-        if (j % 61 === 0 && j > 60) {
-            k++;
+        if (second === 0 && minute === 0) {
+            hour++;
         }
     }
 
@@ -63,7 +72,8 @@ window.onload = function () {
         seconds();
         minutes();
         hours();
+        console.log(hour + ":" + minute + ":" + second);
     }
 
-    window.setInterval(update, 100);
+    window.setInterval(update, 1000);
 };
