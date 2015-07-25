@@ -3,5 +3,11 @@
  */
 
 window.onload = function () {
-    alert('This is from Webstorm, too!');
+    var canvas = document.getElementById("myCanvas");
+    var c = canvas.getContext("2d");
+
+    c.beginPath();
+    c.moveTo(50, 50);
+    c.lineTo(100, 100);
+    c.stroke();
 };
