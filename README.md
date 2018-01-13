@@ -1,2 +1,2 @@
 # clock
-A clock made in d3
+A clock made using canvas
